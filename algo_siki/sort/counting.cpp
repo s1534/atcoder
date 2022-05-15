@@ -43,7 +43,6 @@ int main() {
     cout << endl;
 
     for (int i = n - 1; i >= 0; i--) {
-        // cout << ruiseki.at(a.at(i)) - 1 << endl;
 
         b.at(ruiseki.at(a.at(i)) - 1) = a.at(i);
         ruiseki.at(a.at(i))--;

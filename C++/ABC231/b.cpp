@@ -8,5 +8,8 @@ const long long INF = numeric_limits<long long>::max();
 using Graph = vector<vector<int> >;
 int main()
 {
+    int x;
+    cin >> x;
+    ll ans = 0;
     
 }

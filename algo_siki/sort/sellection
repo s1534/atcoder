@@ -25,29 +25,36 @@ using Graph = vector<vector<int> >;
 int main() {
     int n;
     cin >> n;
-    vector<int> a(n), b(n);
+    vector<int> a(n);
     rep(i, n) cin >> a.at(i);
-    int max_num = 0;
-    rep(i, n) { max_num = max(max_num, a.at(i)); }
-    vector<int> ruiseki(max_num + 1);
+    int now = 0;
+    int j = 0;
 
-    rep(i, n) { ruiseki.at(a.at(i))++; }
-
-    rep2(i, 1, max_num + 1) {
-        ruiseki.at(i) = ruiseki.at(i) + ruiseki.at(i - 1);
+    if(n == 1){
+        return 0;
     }
 
-    rep(i, n) { cout << a.at(i) << ' '; }
-    cout << endl;
-    rep(i, n) { cout << ruiseki.at(i) << ' '; }
-    cout << endl;
+    while (1) {
+        /* code */
+        int tmp = 10000;
+        int num = 10000;
+        rep2(i, now, n) {
+            if (tmp != a.at(i)) {
+                if (tmp > a.at(i)) {
+                    tmp = a.at(i);
+                    num = i;
+                }
+            }
+        }
+        int ttmp = a.at(num);
+        a.at(num) = a.at(now);
+        a.at(now) = ttmp;
+        now++;
 
-    for (int i = n - 1; i >= 0; i--) {
-        // cout << ruiseki.at(a.at(i)) - 1 << endl;
-
-        b.at(ruiseki.at(a.at(i)) - 1) = a.at(i);
-        ruiseki.at(a.at(i))--;
+        rep(i, n) cout << a.at(i) << ' ' << ' ';
+        cout << endl;
+        j++;
+        if (j == n - 1) return 0;
+        // return 0;
     }
-
-    rep(i, n) cout << b.at(i) << ' ';
 }
