@@ -22,20 +22,26 @@ inline bool chmin(T& a, T b) {
 }
 const long long INF = numeric_limits<long long>::max();
 using Graph = vector<vector<int> >;
+vector<int> enumdiv(int n) {
+    vector<int> S;
+    for (int i = 1; 1LL * i * i <= n; i++)
+        if (n % i == 0) {
+            S.push_back(i);
+            if (i * i != n) S.push_back(n / i);
+        }
+    sort(S.begin(), S.end());
+    return S;
+}
 int main() {
     int n;
     cin >> n;
+    int dp[20000];
+    dp[0] = 1;
 
-    int ans = 0;
-    rep(i, n + 1) {
-        rep(j, n + 1) {
-            rep(k, n + 1) {
-                if (i * 1 + j * 2 + k * 3 == n) {
-                    ans++;
-                }
-            }
-        }
+    rep(i, n+1) {
+        if (i - 1 >= 0) dp[i] += dp[i - 1];
+        if (i - 2 >= 0) dp[i] += dp[i - 2];
+        if (i - 3 >= 0) dp[i] += dp[i - 3];
     }
-
-    cout << ans;
+    cout << dp[n-1];
 }
