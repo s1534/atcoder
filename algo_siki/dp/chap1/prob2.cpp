@@ -33,6 +33,5 @@ int main() {
 
     rep2(i, 2, n) { dp[i] = min(dp[i - 1] + a.at(i), dp[i - 2] + 2 * a.at(i)); }
 
-    // rep(i, 5) { cout << dp[i] << endl; }
     cout << dp[n - 1];
 }

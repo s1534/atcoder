@@ -33,37 +33,36 @@ vector<int> enumdiv(int n) {
     return S;
 }
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> a(n - 1);
-    rep(i, n - 1) cin >> a.at(i);
-
-    int dp[n][m];
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    vector<int> num(4);
+    rep(i, n) cin >> a.at(i);
+    int ans = 0;
     rep(i, n) {
-        rep(j, m) { dp[i][j] = 0; }
-    }
-    dp[0][0] = 1;
-
-    rep(i, n-1) {
-        rep(j, m) {
-            if (dp[i][j] == 0) continue;
-
-            dp[i + 1][j] = 1;
-
-            if (j + a.at(i) < m) {
-                dp[i + 1][j + a.at(i)] = 1;
+        vector<int> tmp(4);
+        num.at(0) = 1;
+        // for (auto& b : num) cout << b << ' ';
+        // cout << endl;
+        rep(j, 4) {
+            if (num.at(j) > 0) {
+                if (j + a.at(i) >= 4) {
+                    ans++;
+                    tmp.at(j) -= 1;
+                } else {
+                    tmp.at(j + a.at(i)) += 2;
+                }
             }
         }
-    }
-    int ans = 0;
-
-    // rep(i, n) {
-    //     rep(j, m) { cout << dp[i][j] << ' '; }
-    //     cout << endl;
-    // }
-
-    rep(i, m) {
-        if (dp[n - 1][i]) ans++;
+        rep(j, 4) {
+            if (tmp.at(j) < 0)
+                num.at(j) = 0;
+            else {
+                num.at(j) = tmp.at(j);
+            }
+        }
+        // for (auto& b : num) cout << b << ' ';
+        // cout << endl;
     }
     cout << ans;
 }

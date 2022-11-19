@@ -33,37 +33,33 @@ vector<int> enumdiv(int n) {
     return S;
 }
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> a(n - 1);
-    rep(i, n - 1) cin >> a.at(i);
+    int n;
+    cin >> n;
 
-    int dp[n][m];
-    rep(i, n) {
-        rep(j, m) { dp[i][j] = 0; }
-    }
-    dp[0][0] = 1;
+    int tmp[n];
+    rep(i, n) { tmp[i] = i + 1; }
 
-    rep(i, n-1) {
-        rep(j, m) {
-            if (dp[i][j] == 0) continue;
+    vector<int> p(n), q(n);
+    rep(i, n) cin >> p.at(i);
+    rep(i, n) cin >> q.at(i);
+    int num1 = 0, num2 = 0;
+    int j = 0;
 
-            dp[i + 1][j] = 1;
-
-            if (j + a.at(i) < m) {
-                dp[i + 1][j + a.at(i)] = 1;
-            }
+    do {
+        j++;
+        vector<int> now(n);
+        for (int i = 0; i < n; i++) {
+            // cout << tmp[i];
+            now.at(i) = tmp[i];
+            // if (i != n - 1) cout << " ";
         }
-    }
-    int ans = 0;
-
-    // rep(i, n) {
-    //     rep(j, m) { cout << dp[i][j] << ' '; }
-    //     cout << endl;
-    // }
-
-    rep(i, m) {
-        if (dp[n - 1][i]) ans++;
-    }
-    cout << ans;
+        if (now == p) {
+            num1 = j;
+        }
+        if (now == q) {
+            num2 = j;
+        }
+        // cout << endl;
+    } while (next_permutation(tmp, tmp + n));
+    cout << abs(num1 - num2);
 }

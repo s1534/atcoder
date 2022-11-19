@@ -21,7 +21,7 @@ inline bool chmin(T& a, T b) {
     return 0;
 }
 const long long INF = numeric_limits<long long>::max();
-using Graph = vector<vector<int> >;
+using Graph = vector<vector<int>>;
 vector<int> enumdiv(int n) {
     vector<int> S;
     for (int i = 1; 1LL * i * i <= n; i++)
@@ -33,37 +33,36 @@ vector<int> enumdiv(int n) {
     return S;
 }
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> a(n - 1);
-    rep(i, n - 1) cin >> a.at(i);
-
-    int dp[n][m];
+    int n;
+    string s;
+    // vector<int> w(n);
+    int w;
+    vector<pair<int, char>> v;
+    cin >> n;
+    cin >> s;
+    int adult = 0, child = 0;
     rep(i, n) {
-        rep(j, m) { dp[i][j] = 0; }
+        cin >> w;
+        v.push_back({w, s.at(i)});
+        if (s.at(i) == '1') adult++;
     }
-    dp[0][0] = 1;
+    sort(ALL(v));
+    int ans = adult;
+    int tmp = adult;
+    rep(i, n) {
+        // cout << v[i].first << ' ' << v[i].second << endl;
+        if (v[i].second == '0')
+            tmp++;
+        else
+            tmp--;
 
-    rep(i, n-1) {
-        rep(j, m) {
-            if (dp[i][j] == 0) continue;
-
-            dp[i + 1][j] = 1;
-
-            if (j + a.at(i) < m) {
-                dp[i + 1][j + a.at(i)] = 1;
+        if (i < (n - 1)) {
+            if (v[i].first != v[i + 1].first) {
+                ans = max(ans, tmp);
             }
+        } else {
+            ans = max(ans, tmp);
         }
-    }
-    int ans = 0;
-
-    // rep(i, n) {
-    //     rep(j, m) { cout << dp[i][j] << ' '; }
-    //     cout << endl;
-    // }
-
-    rep(i, m) {
-        if (dp[n - 1][i]) ans++;
     }
     cout << ans;
 }

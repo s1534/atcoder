@@ -17,14 +17,17 @@ return S;
 }
 int main()
 {
-    int n,m;
-    cin >> n >> m;
+    vector<int> ascii_vals{};
+    vector<char> chars{};
+    int tmp;
+    cin >> tmp;
+    ascii_vals.push_back(tmp);
 
-
-    rep(i,m){
-        int a,b;
-        cin >> a >> b;
-        
-
+    chars.reserve(ascii_vals.size());
+    for (auto& n : ascii_vals) {
+        chars.push_back(n);
     }
+    copy(chars.begin(), chars.end(), std::ostream_iterator<char>(cout));
+
+    return EXIT_SUCCESS;
 }

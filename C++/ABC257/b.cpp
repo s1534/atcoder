@@ -33,37 +33,31 @@ vector<int> enumdiv(int n) {
     return S;
 }
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> a(n - 1);
-    rep(i, n - 1) cin >> a.at(i);
-
-    int dp[n][m];
-    rep(i, n) {
-        rep(j, m) { dp[i][j] = 0; }
+    int n, k, q;
+    cin >> n >> k >> q;
+    vector<int> now(n);
+    vector<int> a(k), l(q);
+    rep(i, k) {
+        cin >> a.at(i);
+        now.at(a.at(i) - 1) = 1;
     }
-    dp[0][0] = 1;
+    rep(i, q) cin >> l.at(i);
 
-    rep(i, n-1) {
-        rep(j, m) {
-            if (dp[i][j] == 0) continue;
-
-            dp[i + 1][j] = 1;
-
-            if (j + a.at(i) < m) {
-                dp[i + 1][j + a.at(i)] = 1;
+    rep(i, q) {
+        vector<int> tmp(n);
+        if (a.at(l.at(i) - 1) == n)
+            continue;
+        else {
+            if (now.at(a.at(l.at(i) - 1)) != 0) {
+                continue;
+            } else {
+                now.at(a.at(l.at(i) - 1) - 1) = 0;
+                now.at(a.at(l.at(i) - 1)) = 1;
+                a.at(l.at(i) - 1)++;
             }
         }
     }
-    int ans = 0;
-
-    // rep(i, n) {
-    //     rep(j, m) { cout << dp[i][j] << ' '; }
-    //     cout << endl;
-    // }
-
-    rep(i, m) {
-        if (dp[n - 1][i]) ans++;
+    rep(i, n) {
+        if (now.at(i) != 0) cout << i + 1 << ' ';
     }
-    cout << ans;
 }

@@ -17,14 +17,15 @@ return S;
 }
 int main()
 {
-    int n,m;
-    cin >> n >> m;
-
-
-    rep(i,m){
-        int a,b;
-        cin >> a >> b;
-        
-
+    int n;
+    cin >> n;
+    ll ans = 1;
+    while (n>0)
+    {
+        /* code */
+        ans*=2;
+        n--;
     }
+    cout << ans;
+
 }

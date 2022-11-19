@@ -17,14 +17,28 @@ return S;
 }
 int main()
 {
-    int n,m;
-    cin >> n >> m;
+    int q;
+    cin >> q;
+    multiset<int> ans;
+    rep(i,q){
+        int x;
+        cin >> x;
+        if(x == 1){
+            int y;
+            cin >> y;
+            ans.insert(y);
+        }
+        if(x==2){
+            int y,z;
+            cin >> y >> z;
+            int tmp = min(y,ans_map[z]);
+            ans_map[]
 
+        }
+        if(x==3){
+            
 
-    rep(i,m){
-        int a,b;
-        cin >> a >> b;
-        
+        }
 
     }
 }

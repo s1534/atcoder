@@ -17,14 +17,31 @@ return S;
 }
 int main()
 {
-    int n,m;
-    cin >> n >> m;
+    int n,k;
+    cin >> n >> k;
+    vector<int> a(n),b(n);
+    rep(i, n) cin >> a.at(i);
+    rep(i, k) cin >> b.at(i);
 
+    vector<int> ttt;
 
-    rep(i,m){
-        int a,b;
-        cin >> a >> b;
-        
+    int tmp = 0,j = 0;
 
+    rep(i,n){
+        if(a.at(i) >= tmp){
+            tmp = a.at(i);
+        }
     }
+    bool flag = false;
+    // cout << tmp << endl;
+    rep(i,n){
+        if(a.at(i) == tmp){
+            rep(j,k){
+                // cout << a.at(j) << endl;
+                if(i==b.at(j)-1) flag = true;
+            }
+        }
+    }
+    if(flag) cout << "Yes";
+    else cout << "No";
 }

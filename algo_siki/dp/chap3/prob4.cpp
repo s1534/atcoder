@@ -35,47 +35,35 @@ vector<int> enumdiv(int n) {
 int main() {
     int n, m;
     cin >> n >> m;
-    vector<int> a(n - 1);
-    vector<int> b(n - 1);
+    vector<int> w(n);
+    vector<int> v(n);
 
-    int dp[n][m];
-    rep(i, n) {
-        rep(j, m) { dp[i][j] = -1; }
+    rep(i, n) cin >> w.at(i);
+    rep(i, n) cin >> v.at(i);
+
+    int dp[n + 1][m + 1];
+
+    rep(i, n + 1) {
+        rep(j, m + 1) { dp[i][j] = -1; }
     }
-    rep(i, n - 1) cin >> a.at(i);
-    rep(i, n - 1) cin >> b.at(i);
 
     dp[0][0] = 0;
 
-    rep(i, n - 1) {
-        rep(j, m) {
-            // dp[i + 1][j] = dp[i][j];
-
+    rep(i, n) {
+        rep(j, m + 1) {
             if (dp[i][j] < 0) continue;
 
-            if (dp[i + 1][j] < dp[i][j])
-                dp[i + 1][j] = dp[i][j];
-
-                    if (j + a.at(i) < m) {
-                    dp[i + 1][j + a.at(i)] =
-                        max(dp[i + 1][j + a.at(i)], dp[i][j] + b.at(i));
-                }
-
-            // else {
-            //     dp[i+1][j] = dp[i][j];
-            // }
+            dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
+            if (j + w.at(i) <= m) {
+                dp[i + 1][j + w.at(i)] =
+                    max(dp[i][j] + v.at(i), dp[i + 1][j + w.at(i)]);
+            }
         }
     }
 
-    // rep(i, n) {
-    //     rep(j, m) { cout << dp[i][j] << ' '; }
-    //     cout << endl;
-    // }
+    int res = -1;
+    for (int j = 0; j <= m; ++j) res = max(res, dp[n][j]);
+    cout << res << endl;
 
-    if (dp[n - 1][m - 1] == 0) {
-        cout << "-1";
-        return 0;
-    }
-
-    cout << dp[n - 1][m - 1];
+    // cout << dp[n - 1][m];
 }

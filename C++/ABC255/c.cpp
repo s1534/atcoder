@@ -33,37 +33,25 @@ vector<int> enumdiv(int n) {
     return S;
 }
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> a(n - 1);
-    rep(i, n - 1) cin >> a.at(i);
-
-    int dp[n][m];
-    rep(i, n) {
-        rep(j, m) { dp[i][j] = 0; }
-    }
-    dp[0][0] = 1;
-
-    rep(i, n-1) {
-        rep(j, m) {
-            if (dp[i][j] == 0) continue;
-
-            dp[i + 1][j] = 1;
-
-            if (j + a.at(i) < m) {
-                dp[i + 1][j + a.at(i)] = 1;
+    int h1, h2, h3, w1, w2, w3;
+    cin >> h1 >> h2 >> h3 >> w1 >> w2 >> w3;
+    int ans = 0;
+    rep2(i, 1, 31) {
+        rep2(j, 1, 31) {
+            rep2(k, 1, 31) {
+                rep2(l, 1, 31) {
+                    int c = h1 - i - j;
+                    int f = h2 - k - l;
+                    int g = w1 - i - k;
+                    int h = w2 - j - l;
+                    int m = h3 - g - h;
+                    if (w3 == c + f + m &&
+                        min(c, min(f, min(g, min(h, m)))) > 0) {
+                        ans++;
+                    }
+                }
             }
         }
-    }
-    int ans = 0;
-
-    // rep(i, n) {
-    //     rep(j, m) { cout << dp[i][j] << ' '; }
-    //     cout << endl;
-    // }
-
-    rep(i, m) {
-        if (dp[n - 1][i]) ans++;
     }
     cout << ans;
 }

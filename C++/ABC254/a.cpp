@@ -17,14 +17,8 @@ return S;
 }
 int main()
 {
-    int n,m;
-    cin >> n >> m;
+    string s;
+    cin >>s;
+    cout << s.at(1) << s.at(2);
 
-
-    rep(i,m){
-        int a,b;
-        cin >> a >> b;
-        
-
-    }
 }

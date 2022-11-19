@@ -17,14 +17,5 @@ return S;
 }
 int main()
 {
-    int n,m;
-    cin >> n >> m;
-
-
-    rep(i,m){
-        int a,b;
-        cin >> a >> b;
-        
-
-    }
+    
 }

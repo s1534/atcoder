@@ -17,14 +17,11 @@ return S;
 }
 int main()
 {
-    int n,m;
-    cin >> n >> m;
+    int n;
+    cin >> n;
+    vector<string> s(n);rep(i,n) cin >> s.at(i);
+    string first = s.at(0);
 
+    
 
-    rep(i,m){
-        int a,b;
-        cin >> a >> b;
-        
-
-    }
 }

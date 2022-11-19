@@ -33,37 +33,37 @@ vector<int> enumdiv(int n) {
     return S;
 }
 int main() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> a(n - 1);
-    rep(i, n - 1) cin >> a.at(i);
+    int n;
+    cin >> n;
+    vector<int> l(n), r(n);
+    rep(i, n) cin >> l.at(i) >> r.at(i);
+    vector<int> a(2 * pow(10, 5) + 10);
 
-    int dp[n][m];
     rep(i, n) {
-        rep(j, m) { dp[i][j] = 0; }
-    }
-    dp[0][0] = 1;
+        if (a.at(l.at(i)) == 0) {
+            a.at(l.at(i)) = 1;
+        } else if (a.at(l.at(i)) == -1) {
+            a.at(l.at(i)) = 0;
+        } else {
+            continue;
+            a.at(l.at(i)) = -1;
+        }
 
-    rep(i, n-1) {
-        rep(j, m) {
-            if (dp[i][j] == 0) continue;
-
-            dp[i + 1][j] = 1;
-
-            if (j + a.at(i) < m) {
-                dp[i + 1][j + a.at(i)] = 1;
-            }
+        if (a.at(r.at(i) == 1)) {
+            continue;
+        } else {
+            a.at(r.at(i)) = -1;
         }
     }
-    int ans = 0;
-
-    // rep(i, n) {
-    //     rep(j, m) { cout << dp[i][j] << ' '; }
-    //     cout << endl;
-    // }
-
-    rep(i, m) {
-        if (dp[n - 1][i]) ans++;
+    for (int i = 10; i <= 60; i += 10) {
+        cout << a.at(i) << ' ';
     }
-    cout << ans;
+    // rep(i, 2 * pow(10, 5) + 10) {
+    //     if (a.at(i) == 1) {
+    //         cout << i << ' ';
+    //     }
+    //     if (a.at(i) == -1) {
+    //         cout << i << endl;
+    //     }
+    // }
 }
